@@ -64,10 +64,14 @@ fun CalculadoraPropinas() {
         Spacer(modifier = Modifier.height(20.dp))
 
         Button(onClick = {
-            val montoNum = monto.value.toDoubleOrNull() ?: 0.0
-            val porcentajeNum = porcentaje.value.toDoubleOrNull() ?: 0.0
-            val propina = montoNum * (porcentajeNum / 100)
-            resultado.value = "Propina: $%.2f".format(propina)
+            if (monto.value.isEmpty() || porcentaje.value.isEmpty()) {
+                resultado.value = "Por favor completa todos los campos"
+            } else {
+                val montoNum = monto.value.toDoubleOrNull() ?: 0.0
+                val porcentajeNum = porcentaje.value.toDoubleOrNull() ?: 0.0
+                val propina = montoNum * (porcentajeNum / 100)
+                resultado.value = "Propina: $%.2f".format(propina)
+            }
         }) {
             Text("Calcular")
         }
